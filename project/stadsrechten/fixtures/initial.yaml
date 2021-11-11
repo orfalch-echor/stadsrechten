@@ -1,0 +1,115 @@
+- model: stadsrechten.titel
+  pk: 1
+  fields:
+    naam: Stadhouder
+- model: stadsrechten.titel
+  pk: 2
+  fields:
+    naam: Keizer
+- model: stadsrechten.titel
+  pk: 3
+  fields:
+    naam: Prins-Bisschop
+- model: stadsrechten.titel
+  pk: 4
+  fields:
+    naam: Koning
+- model: stadsrechten.titel
+  pk: 5
+  fields:
+    naam: Vrouwe
+- model: stadsrechten.titel
+  pk: 6
+  fields:
+    naam: Gravin
+- model: stadsrechten.titel
+  pk: 7
+  fields:
+    naam: Bisschop
+- model: stadsrechten.titel
+  pk: 8
+  fields:
+    naam: Graaf
+- model: stadsrechten.titel
+  pk: 9
+  fields:
+    naam: Prins
+- model: stadsrechten.titel
+  pk: 10
+  fields:
+    naam: Heer
+- model: stadsrechten.titel
+  pk: 11
+  fields:
+    naam: Hertog
+- model: stadsrechten.provincie
+  pk: 1
+  fields:
+    naam: Zuid-Holland
+- model: stadsrechten.provincie
+  pk: 2
+  fields:
+    naam: Noord-Holland
+- model: stadsrechten.provincie
+  pk: 3
+  fields:
+    naam: Utrecht
+- model: stadsrechten.provincie
+  pk: 4
+  fields:
+    naam: Limburg
+- model: stadsrechten.provincie
+  pk: 5
+  fields:
+    naam: Zeeland
+- model: stadsrechten.provincie
+  pk: 6
+  fields:
+    naam: Noord-Brabant
+- model: stadsrechten.provincie
+  pk: 7
+  fields:
+    naam: Gelderland
+- model: stadsrechten.provincie
+  pk: 8
+  fields:
+    naam: Overijssel
+- model: stadsrechten.provincie
+  pk: 9
+  fields:
+    naam: Groningen
+- model: stadsrechten.provincie
+  pk: 10
+  fields:
+    naam: Drenthe
+- model: stadsrechten.provincie
+  pk: 11
+  fields:
+    naam: Flevoland
+- model: stadsrechten.provincie
+  pk: 12
+  fields:
+    naam: Friesland
+- model: stadsrechten.verlener
+  pk: 1
+  fields:
+    naam: Willem II
+    titel_id: 1
+- model: stadsrechten.stad
+  pk: 1
+  fields:
+    naam: Delft
+    verleendatum: 1246-04-15
+    verlener_id: 1
+    provincie_id: 1
+    stad: True
+    banned: False
+- model: stadsrechten.stad
+  pk: 2
+  fields:
+    naam: Haarlem
+    verleendatum: 1245-11-23
+    verlener_id: 1
+    provincie_id: 2
+    stad: True
+    banned: False

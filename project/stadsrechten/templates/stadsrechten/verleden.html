@@ -1,0 +1,26 @@
+{% load static %}
+
+{% for v in sporen %}
+<div class="card mb-3">
+    <div class="card-header">
+        <b>{{ v.naam }}</b>
+        {% if v.mlat %}
+          <a href="https://www.openstreetmap.org/?mlat={{ v.mlat }}&mlon={{ v.mlon }}&zoom=20" target="_blank">
+             <i class="fa fa-globe"></i>
+          </a>
+        {% endif %}
+    </div>
+    <div class="container">
+       <div class="row">
+          <div class="col-md-6">
+              {% with 'stadsrechten/images/'|add:v.image as image_static %}
+                 <img src="{% static image_static %}" class="img-fluid">
+              {% endwith %}
+          </div>
+          <div class="col-md-6">
+             {{ v.beschrijving | safe }}
+          </div>
+       </div>
+    </div>
+</div>
+{% endfor %}

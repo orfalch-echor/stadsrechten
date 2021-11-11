@@ -1,0 +1,124 @@
+{% extends "stadsrechten/header.html" %}
+{% load static %}
+{% load i18n %}
+{% block content %}
+
+<style>
+.card-img-top {
+    width: 200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.img-thumbnail {
+    width: 150px;
+    margin-left: auto;
+    margin-right: auto;
+}
+</style>
+
+<div class="card" style="width: 18rem;">
+    {% with 'stadsrechten/images/'|add:stad.wapen as image_static %}
+       <img class="card-img-top" src="{% static image_static %}" alt="Wapen">
+    {% endwith %}
+    <div class="card-body">
+      <p class="card-text"><h1><b>{{ stad.naam }}</b></h1></p>
+      {% if stad.latin %}
+      <h6 class="card-subtitle mb-2 text-muted">{{ stad.latin }}</h6>
+      {% endif %}
+    
+      <p><small>{% language 'nl' %}{{ stad.verleendatum }}{% endlanguage %}</small></p>
+    </div>
+</div>
+
+<div id="accordion">
+  <div class="card">
+      <h5 class="card-header">
+        <a class="collapsed d-block" data-toggle="collapse" data-target="#collapseFive" aria-expanded="true" aria-controls="collapseFive">
+          Historische kaarten
+        </a>
+      </h5>
+    <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordion">
+      <div class="card-body">
+      </div>
+    </div>
+  </div>
+  <div class="card">
+      <h5 class="card-header">
+        <a class="collapsed d-block" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+          Citaat Repertorium
+        </a>
+      </h5>
+    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+      <div class="card-body">
+         <i class="fas fa-quote-left"></i>
+         {{ stad.beschrijving | linebreaks }}
+         <footer class=blockquote-footer>Bron: <cite title="Source Title">Repertorium van de stadsrechten in Nederland</cite></p>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+      <h5 class="card-header">
+        <a class="collapsed d-block" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
+          Bezoek
+        </a>
+      </h5>
+    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+      <div class="card-body">
+         <p><small>{{ bezoek.rating|floatformat }}/10</small>
+         <p><small>{% language 'nl' %}{{ bezoek.datum }}{% endlanguage %}</p></small>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+      <h5 class="card-header">
+        <a class="collapsed d-block" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+          Verlener
+        </a>
+      </h5>
+    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+      <div class="card-body">
+        <div class="container">
+         <div class="row">
+           <div class="col-sm">
+             {% if stad.verlener %}
+               {{ stad.verlener.titel.naam }}
+               {{ stad.verlener.naam }}
+               {% for l in land %}
+                  {% if l.naam == 'Nederlanden' %}
+                     <p>{{ stad.verlener.titel.naam }} der {{ l.naam }}</p>
+                  {% else %}
+                     <p>{{ stad.verlener.titel.naam }} van {{ l.naam }}</p>
+                  {% endif %}
+               {% endfor %}
+             {% endif %}
+           </div>
+           <div class="col-sm">
+               {% if stad.verlener %}
+                 {% with 'stadsrechten/images/'|add:stad.verlener.titel.kroon as image_static %}
+                   <img src="{% static image_static %}" class="img-thumbnail">
+                   {% if stad.verlener.titel.copyright == 'Noshow' %}
+                      <figcaption class="figure-caption">&copy; {{ stad.verlener.titel.copyright }}</figcaption>
+                   {% endif %}
+                 {% endwith %}
+               {% endif %}
+           </div>
+         </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+      <h5 class="card-header">
+        <a class="collapsed d-block" data-toggle="collapse" data-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour">
+          Sporen van het verleden
+        </a>
+      </h5>
+    <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordion">
+      <div class="card-body">
+          {% include "stadsrechten/verleden.html" %}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

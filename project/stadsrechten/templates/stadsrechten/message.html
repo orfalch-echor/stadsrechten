@@ -1,0 +1,22 @@
+{% load static %}
+  <div class="row">
+      {% for ioi in iois %}
+        <div class="col-lg-4">
+            {% with 'stadsrechten/images/'|add:ioi.wapen as image_static %}
+               <img class="img"
+                   src="{% static image_static %}"
+                   alt="Generic placeholder image" height="118">
+            {% endwith %}
+          {% if ioi.object_naam == 'verlener' %}
+          <h2>{{ ioi.titel.naam }} {{ ioi.naam }}</h2>
+          <p><a class="btn btn-default" href="{% url 'stadsrechten:verlener' ioi.id %}" title="View {{ ioi.naam }}" role="button">Details&raquo;</a></p>
+          {% endif %}
+          {% if ioi.object_naam == 'stad' %}
+          <p class="stadsrechten"><b>{{ ioi.verleendatum | date:"Y" }}</b></p>
+          <p><a class="btn btn-default" href="{% url 'stadsrechten:stad' ioi.id %}" title="View {{ ioi.naam }}" role="button">Details &raquo;</a></p>
+          <h2>{{ ioi.naam }}</h2>
+          {% endif %}
+          </a>
+        </div>
+      {% endfor %}
+  </div>

@@ -1,0 +1,73 @@
+{% extends "stadsrechten/header.html" %}
+{% load static %}
+{% load i18n %}
+{% block content %}
+
+<style>
+.card-img-top {
+    width: 200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.img-thumbnail {
+    width: 150px;
+    margin-left: auto;
+    margin-right: auto;
+}
+</style>
+
+<div class="card" style="width: 18rem;">
+    {% with 'stadsrechten/images/'|add:verlener.wapen as image_static %}
+       <img class="card-img-top" src="{% static image_static %}" alt="Wapen">
+    {% endwith %}
+    <div class="card-body">
+      <p class="card-text"><h1><b>{{ verlener.naam }}</b></h1></p>
+    </div>
+</div>
+
+<div id="accordion">
+  <div class="card">
+      <h5 class="card-header">
+        <a class="collapsed d-block" data-toggle="collapse" data-target="#collapseFive" aria-expanded="true" aria-controls="collapseFive">
+          Afbeeldingen
+        </a>
+      </h5>
+    <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordion">
+      <div class="card-body">
+      </div>
+    </div>
+  </div>
+  <div class="card">
+      <h5 class="card-header">
+        <a class="collapsed d-block" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+          Korte biografie
+        </a>
+      </h5>
+    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+      <div class="card-body">
+         <i class="fas fa-quote-left"></i>
+         {{ verlener.beschrijving | linebreaks }}
+      </div>
+    </div>
+  </div>
+  <div class="card">
+      <h5 class="card-header">
+        <a class="collapsed d-block" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+          Steden
+        </a>
+      </h5>
+    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+      <div class="card-body">
+        <div class="container">
+         {% for stad in steden %}
+         <div class="row">
+             {{ stad.naam }}
+         </div>
+         {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends "stadsrechten/header.html" %}
+{% load static %}
+{% block content %}
+{% load i18n %}
+<table class="table table-hover table-light">
+  <thead>
+    <tr>
+      <th scope="col">Stad</th>
+      <th scope="col">Naam</th>
+      <th scope="col">Stad sinds</th>
+    </tr>
+  </thead>
+{% for stad in steden %}
+  <tr class="clickable-row" data-href="{% url 'stadsrechten:stad' stad_id=stad.id %}">
+    {% if stad.stad == True %}
+       <td><i class="fa fa-flag"></i></td>
+    {% else %}
+       <td><i class="fa fa-circle"></i></td>
+    {% endif %}
+    <td>{{ stad.naam }}</td>
+    <td>{% language 'nl' %}{{ stad.verleendatum|date:"Y" }}{% endlanguage %}</td>
+ </tr>
+{% endfor %}
+</table>
+
+<script>
+jQuery(document).ready(function($) {
+    $(".clickable-row").click(function() {
+        window.location = $(this).data("href");
+    });
+});
+</script>
+{% endblock %}
